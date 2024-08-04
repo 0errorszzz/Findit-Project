@@ -1,6 +1,6 @@
 import {Outlet, useLoaderData,redirect,useNavigate,useNavigation} from 'react-router-dom'
 import Wrapper from '../assets/wrappers/Dashboard'
-import { BigSideBar, SmallSideBar,NavBar,loading} from '../components'
+import { BigSideBar, SmallSideBar,NavBar,Loading} from '../components'
 import { useContext, useState,createContext } from 'react'
 import { checkDefaultTheme } from '../App'
 import customFetch from '../utils/customFetch'
