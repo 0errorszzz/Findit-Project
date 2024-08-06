@@ -6,7 +6,7 @@ import { FormRow } from '../components'
 import customFetch from '../utils/customFetch.js'
 import { toast } from 'react-toastify';
 
-export const action =async({request})=>{
+export const action =(queryClient)=>async({request})=>{
   const formData=await request.formData()
   const data =Object.fromEntries(formData)
   const errors ={msg:''}
@@ -16,10 +16,11 @@ export const action =async({request})=>{
   }
   try {
     await customFetch.post('/auth/login',data)
+    queryClient.invalidateQueries()
     toast.success('Login Successfully')
     return redirect('/dashboard')
   } catch (error) {
-    toast.success(error?.response?.data?.msg)
+    toast.error(error?.response?.data?.msg)
     return error
   }
 }
@@ -38,7 +39,7 @@ const Login = () => {
       navigate('/dashboard')
       
     } catch (error) {
-      toast.success(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg)
     }
   }
 
