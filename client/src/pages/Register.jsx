@@ -28,7 +28,7 @@ const Register = () => {
     <Form method='post' className='form'>
       <Logo />
       <h4>Register</h4>
-      <FormRow type="text" name="First Name" />
+      <FormRow type="text" name="name"labelText="First Name"/>
       <FormRow type="text" name="lastName" labelText='Last Name'/>
       <FormRow type="text" name="location" />
       <FormRow type="email" name="email" />
