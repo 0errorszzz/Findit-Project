@@ -13,7 +13,7 @@ const Job = ({
 }) => {
     const date = day(createdAt).format('MMM Do,YYYY')
     const { user } = useOutletContext(); 
-    const isAdmin = user?.isAdmin; 
+    const isAdmin = user?.role === 'admin'; 
   return (
     <Wrapper>
         <header>
