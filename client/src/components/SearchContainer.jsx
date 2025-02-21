@@ -7,7 +7,7 @@ import { useAllJobsContext } from '../pages/AllJobs';
 
 const SearchContainer = () => {
   const {searchValues}=useAllJobsContext()
-  const {search,jobStatus,jobType,sort}=searchValues
+  const {search,jobStatus,jobType,sort,location}=searchValues
   const submit = useSubmit()
 
   const debounce = (onChange)=>{
@@ -25,12 +25,30 @@ const SearchContainer = () => {
       <Form className='form'>
         <h5 className='form-title'>search form</h5>
         <div className='form-center'>
-          <FormRow type='search' 
-                   name='search' 
-                   defaultValue={search}
-                   onChange={debounce((form)=>{
-                   submit(form)
-          })}/>
+        <div className="form-row">
+            <label htmlFor="search" className="form-label">
+              Search (Job Title or Company)
+            </label>
+            <input
+              type="search"
+              id="search"
+              name="search"
+              defaultValue={search}
+              className="form-input"
+              onChange={debounce((form) => {
+                submit(form);
+              })}
+            />
+          </div>
+          <FormRow
+            type="text"
+            name="location"
+            labelText="Location"
+            defaultValue={location}
+            onChange={debounce((form) => {
+              submit(form);
+            })}
+          />
           
           <FormRowSelect labelText='job status' 
                          name='jobStatus' 

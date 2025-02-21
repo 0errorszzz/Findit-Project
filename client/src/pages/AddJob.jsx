@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { FormRow ,FormRowSelect,SubmitBtn} from '../components';
 import Wrapper from '../assets/wrappers/DashboardFormPage';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext ,Navigate} from 'react-router-dom';
 import { JOB_STATUS, JOB_TYPE } from '../../../utils/constants';
 import { Form, redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -26,6 +26,10 @@ export const action=(queryClient)=>async({request})=>{
 }
 const AddJob = () => {
   const {user}=useOutletContext()
+  const isAdmin = user?.role === 'admin';
+  if (!isAdmin) {
+    return <Navigate to="/dashboard/all-jobs" replace />;
+  }
  
   return <Wrapper>
     <Form method="post" className='form'>

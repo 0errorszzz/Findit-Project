@@ -17,7 +17,7 @@ const Landing = () => {
             job <span>Finding</span> app
             </h1>
             <p>
-            Big mood locavore woke, gastropub everyday carry kinfolk chillwave cold-pressed fit plaid la croix man bun. Raw denim stumptown truffaut health goth seitan banh mi, tofu direct trade narwhal solarpunk shaman selfies forage salvia. Readymade VHS lomo cliche swag, tattooed iPhone paleo kinfolk cray church-key live-edge hot chicken everyday carry. 
+            Welcome to our modern platform built to seamlessly connect job seekers and employers. Whether you’re a recent graduate stepping into the professional world or an experienced recruiter searching for top talent, our streamlined approach makes it easier than ever to find your perfect match. Employers can post roles in minutes, while job seekers can discover opportunities tailored to their skills and aspirations. Let’s work together to make job hunting and recruitment simpler, faster, and more rewarding for everyone.
             </p>
             <Link to="/register" className='btn register-link'>
               Register

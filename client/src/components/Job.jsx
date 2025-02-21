@@ -1,4 +1,5 @@
 import React from 'react'
+import { useOutletContext } from 'react-router-dom'; 
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { Link ,Form } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/Job';
@@ -11,6 +12,8 @@ const Job = ({
     _id,position,company,jobLocation,jobType,createdAt,jobStatus
 }) => {
     const date = day(createdAt).format('MMM Do,YYYY')
+    const { user } = useOutletContext(); 
+    const isAdmin = user?.isAdmin; 
   return (
     <Wrapper>
         <header>
@@ -28,14 +31,16 @@ const Job = ({
                 <div className={`status ${jobStatus}`}>{jobStatus}</div>
             </div>
         </div>
-        <footer className='actions'>
-        <Link to ={`../edit-job/${_id}`}className='btn edit-btn'>Edit</Link>
-        <Form method='post' action={`../delete-job/${_id}`}>
-            <button type='submit' className='btn delete-btn'>
-                Delete
-            </button>
-        </Form>
-        </footer>
+        {isAdmin && (
+                <footer className='actions'>
+                    <Link to={`../edit-job/${_id}`} className='btn edit-btn'>Edit</Link>
+                    <Form method='post' action={`../delete-job/${_id}`}>
+                        <button type='submit' className='btn delete-btn'>
+                            Delete
+                        </button>
+                    </Form>
+                </footer>
+            )}
     </Wrapper>
   )
 }

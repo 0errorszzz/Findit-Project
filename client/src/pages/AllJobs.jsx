@@ -5,14 +5,15 @@ import customFetch from '../utils/customFetch';
 import { useLoaderData } from 'react-router-dom';
 import { useContext, createContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
-const AllJobsContext=createContext()
+const AllJobsContext=createContext();
 
 const allJobsQuery = (params) => {
-  const { search, jobStatus, jobType, sort, page } = params;
+  const { search, location, jobStatus, jobType, sort, page } = params;
   return {
     queryKey: [
       'jobs',
       search ?? '',
+      location ?? '',
       jobStatus ?? 'all',
       jobType ?? 'all',
       sort ?? 'newest',

@@ -4,9 +4,9 @@ import mongoose, { Mongoose } from 'mongoose'
 import day from 'dayjs'
 
 export const getAllJobs =async (req,res)=>{
-   const {search, jobStatus,jobType,sort}=req.query
+   const {search, location,jobStatus,jobType,sort}=req.query
    const queryObject={
-    createdBy:req.user.userId,
+   // createdBy:req.user.userId,
    }
    if(search){
     queryObject.$or = [
@@ -18,6 +18,9 @@ export const getAllJobs =async (req,res)=>{
    if(jobStatus && jobStatus!=='all'){
     queryObject.jobStatus=jobStatus
    }
+   if (location && location.trim() !== '') {
+    queryObject.jobLocation = { $regex: location, $options: 'i' };
+  }
    if(jobType && jobType!=='all'){
     queryObject.jobType=jobType
    }
@@ -59,10 +62,16 @@ export const updateJob= async (req,res)=>{
     res.status(StatusCodes.OK).json({msg:'job modified',job:updatedJob})
 }
 
-export const deleteJob = async (req,res)=>{
-    const removedJob =await Job.findOneAndDelete(req.params.id)
-    res.status(StatusCodes.OK).json({msg:'job deleted',job:removedJob})
-}
+export const deleteJob = async (req, res) => {
+    const { id } = req.params;
+    const removedJob = await Job.findByIdAndDelete(id);
+
+    if (!removedJob) {
+        return res.status(StatusCodes.NOT_FOUND).json({ msg: 'Job not found' });
+    }
+
+    res.status(StatusCodes.OK).json({ msg: 'Job deleted successfully' });
+};
 
 export const showStats = async(req,res)=>{
     let stats =await Job.aggregate([
